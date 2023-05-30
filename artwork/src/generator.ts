@@ -1,22 +1,24 @@
+import p5 from 'p5'
+
 import { random } from './helpers.js'
 import { rate } from './media.js'
 
-let t1 = 0,
-  t2 = 0,
-  t3 = 0,
-  t4 = 0
+let t1: number = 0
+let t2: number = 0
+let t3: number = 0
+let t4: number = 0
 
-const generatorFast = (p5, size) => {
+const generatorFast = (p5: p5, size: number) => {
   const iMax = random(20, 200)
 
-  let dt1 = random(0.01, 1),
-    dt2 = random(0.02, 2),
-    dt3 = random(0.03, 3),
-    dt4 = random(0.04, 4)
+  let dt1 = random(0.01, 1)
+  let dt2 = random(0.02, 2)
+  let dt3 = random(0.03, 3)
+  let dt4 = random(0.04, 4)
 
-  let rnd = random(10, 80),
-    wrnd = random(0, 1),
-    hrnd = random(0, 1)
+  let rnd = random(10, 80)
+  let wrnd = random(0, 1)
+  let hrnd = random(0, 1)
 
   return () => {
     p5.clear()
@@ -41,14 +43,13 @@ const generatorFast = (p5, size) => {
   }
 }
 
-const generatorSlow = (p5, size) => {
+const generatorSlow = (p5, size: number) => {
   const iMax = random(20, 200)
 
   let dRate = rate / 10
-
-  let rnd = random(10, 80),
-    wrnd = random(0, 1),
-    hrnd = random(0, 1)
+  let rnd = random(10, 80)
+  let wrnd = random(0, 1)
+  let hrnd = random(0, 1)
 
   return () => {
     p5.clear()

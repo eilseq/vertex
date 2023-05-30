@@ -11,13 +11,14 @@ import { generator } from './src/generator.js'
 import { setDitherColor } from './src/dither.js'
 import { tryPlay } from './src/media.js'
 
-const p5div = document.querySelector('#p5div')
+const p5div: HTMLElement | null = document.querySelector('#p5div')
 const body = document.body
 
 let p5Instance
 const createAnimationInstance = () => {
   const color = getRandomRGB()
-  body.style = `background:rgb(${color[0]}, ${color[1]}, ${color[2]})`
+
+  body.style.background = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
 
   setDitherColor(color)
 
@@ -25,6 +26,8 @@ const createAnimationInstance = () => {
 
   const p5sketch = (p5) => {
     p5.setup = () => {
+      if (!p5div) return
+
       const wrnd = random(-50, 50)
       const hrnd = random(-50, 50)
 
@@ -36,16 +39,19 @@ const createAnimationInstance = () => {
       p5.drawingContext.shadowOffsetX = wrnd
       p5.drawingContext.shadowOffsetY = hrnd
       p5.drawingContext.shadowBlur = 10
-      p5div.style = `
-        transform: rotate(${random(0, 360)}deg);
-        transform: translate(${wrnd}, ${hrnd});
-      `
+
+      p5div.style.transform = `rotate(${random(
+        0,
+        360
+      )}deg), translate(${wrnd}, ${hrnd})`
 
       p5.noFill()
       p5.stroke(color)
       p5.frameRate(35)
       p5.strokeWeight(random(2, 3))
     }
+
+    if (!p5div) return
 
     let generate = generator(p5, getSize(p5div))
 
@@ -64,7 +70,10 @@ const createAnimationInstance = () => {
     }
   }
 
+  if (!p5div) return
+
   p5Instance = new p5(p5sketch, p5div)
+
   setTimeout(createAnimationInstance, 3000)
 }
 createAnimationInstance()
