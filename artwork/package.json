@@ -1,0 +1,19 @@
+{
+  "name": "vertex",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --outDir ../public/v0 --emptyOutDir",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "prettier": "2.7.1",
+    "vite": "^3.1.0"
+  },
+  "dependencies": {
+    "p5": "^1.4.2",
+    "tone": "^14.7.77",
+    "canvas-dither": "^1.0.1"
+  }
+}
