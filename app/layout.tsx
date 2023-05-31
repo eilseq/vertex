@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 
 import '#/styles/globals.css';
+import Token from '#/ui/token';
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +24,7 @@ export default function RootLayout({
     >
       <body className="flex h-screen items-center justify-center overflow-hidden">
         <main>{children}</main>
+        <Token />
       </body>
     </html>
   );

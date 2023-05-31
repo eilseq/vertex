@@ -1,7 +1,18 @@
 'use client';
 
-import Token from '#/ui/token';
+import React, { useEffect } from 'react';
 
 export default function Page({ params }: { params: { id: string } }) {
-  return <Token seed={params.id} />;
+  useEffect(() => {
+    const iframe = document.getElementById(
+      'vertex-iframe',
+    ) as HTMLIFrameElement;
+    const message = {
+      type: 'updateSeed',
+      seed: params.id,
+    };
+    iframe.contentWindow?.postMessage(message, '*');
+  }, [params.id]);
+
+  return <></>;
 }

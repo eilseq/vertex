@@ -3,8 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import Token from '#/ui/token';
-
 export default function Page() {
   const router = useRouter();
 
@@ -43,7 +41,6 @@ export default function Page() {
           </div>
         </div>
       </div>
-      <Token />
     </>
   );
 }

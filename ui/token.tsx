@@ -1,26 +1,15 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
-const Token = React.memo(({ seed }: { seed?: string }) => {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-
-  useEffect(() => {
-    if (iframeRef.current) {
-      iframeRef.current.src = seed
-        ? `/v0/index.html?seed=${seed}`
-        : `/v0/index.html`;
-    }
-  }, [seed]);
-
+const Token = () => {
   return (
     <iframe
-      ref={iframeRef}
+      id="vertex-iframe"
       className="fixed left-0 right-0 top-0 -z-10 h-screen w-screen"
+      src="/v0/index.html"
     />
   );
-});
-
-Token.displayName = 'Token'; // Set the display name
+};
 
 export default Token;
