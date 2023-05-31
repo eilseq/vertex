@@ -3,5 +3,5 @@
 import Token from '#/ui/token';
 
 export default function Page({ params }: { params: { id: string } }) {
-  return <Token hash={params.id} />;
+  return <Token seed={params.id} />;
 }

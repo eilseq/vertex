@@ -1,16 +1,13 @@
 import { Player, start } from 'tone'
-import { random } from './helpers'
+import { params } from './params'
+
+const { rate, audioFile } = params.audio
 
 const vhs: HTMLVideoElement | null = document.querySelector('#vhsNoise')
-
-const audio = new Player(
-  `./audio/${Math.round(random(1, 10))}.mp3`
-).toDestination()
+const audio = new Player(audioFile).toDestination()
 
 audio.autostart = true
 audio.loop = true
-
-export const rate = random(0.5, 1)
 
 function init() {
   if (!vhs) return
@@ -36,7 +33,10 @@ const setCssVars = () => {
     '--animation-step-1',
     (rate < 0.7 ? 0.9 : 0.3).toString()
   )
-  document.documentElement.style.setProperty('--animation-step-2', 0.9)
+  document.documentElement.style.setProperty(
+    '--animation-step-2',
+    (0.9).toString()
+  )
   document.documentElement.style.setProperty(
     '--animation-step-3',
     (rate < 0.7 ? 2 : 10.9).toString()

@@ -8,7 +8,7 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 import { Dropdown, useTheme } from '@nextui-org/react';
 import { Key, useEffect, useMemo, useState } from 'react';
 
-const DEFAULT_HASH = 'ooDefault';
+const DEFAULT_SEED = 'ooCvei2JsMHA9NWpTcoXcSewHYpVSUogZcZyVGPo8xngFgcsG2x';
 
 export default function Selection({
   collection,
@@ -21,7 +21,7 @@ export default function Selection({
   const { theme } = useTheme();
 
   const [selected, setSelected] = useState<Iterable<Key>>(
-    new Set<Key>([DEFAULT_HASH]),
+    new Set<Key>([DEFAULT_SEED]),
   );
 
   const selectedValue = useMemo(
@@ -30,7 +30,7 @@ export default function Selection({
   );
 
   useEffect(() => {
-    if (selectedValue === DEFAULT_HASH) return;
+    if (selectedValue === DEFAULT_SEED) return;
     route.push(`/collection/${selectedValue}`);
   }, [route, selectedValue]);
 
@@ -54,7 +54,7 @@ export default function Selection({
           e?.preventDefault();
         }}
       >
-        {segment || DEFAULT_HASH}
+        {segment || DEFAULT_SEED}
       </Dropdown.Button>
       <Dropdown.Menu
         aria-label="collection tokens"

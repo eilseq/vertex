@@ -1,25 +1,19 @@
 import p5 from 'p5'
 
-import {
-  disableAllUserEvents,
-  getRandomRGB,
-  getSize,
-  random
-} from './src/helpers.js'
-
+import { disableAllUserEvents, getSize, hslToRgb } from './src/helpers.js'
 import { generator } from './src/generator.js'
 import { setDitherColor } from './src/dither.js'
 import { tryPlay } from './src/media.js'
+import { params, updateParams } from './src/params.js'
 
 const p5div: HTMLElement | null = document.querySelector('#p5div')
 const body = document.body
 
-let p5Instance
+let p5Instance: p5 | null = null
 const createAnimationInstance = () => {
-  const color = getRandomRGB()
-
+  const { hue, luma } = params.color
+  const color = hslToRgb([hue, 1, luma])
   body.style.background = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
-
   setDitherColor(color)
 
   if (p5Instance) p5Instance.remove()
@@ -28,8 +22,7 @@ const createAnimationInstance = () => {
     p5.setup = () => {
       if (!p5div) return
 
-      const wrnd = random(-50, 50)
-      const hrnd = random(-50, 50)
+      const { wrnd, hrnd, p5divrotate, strokeweight } = params.setup
 
       p5.createCanvas(p5div.clientWidth * 2, p5div.clientWidth * 2)
       p5.translate(-wrnd, -hrnd)
@@ -40,15 +33,12 @@ const createAnimationInstance = () => {
       p5.drawingContext.shadowOffsetY = hrnd
       p5.drawingContext.shadowBlur = 10
 
-      p5div.style.transform = `rotate(${random(
-        0,
-        360
-      )}deg), translate(${wrnd}, ${hrnd})`
+      p5div.style.transform = `rotate(${p5divrotate}deg), translate(${wrnd}, ${hrnd})`
 
       p5.noFill()
       p5.stroke(color)
       p5.frameRate(35)
-      p5.strokeWeight(random(2, 3))
+      p5.strokeWeight(strokeweight)
     }
 
     if (!p5div) return
@@ -74,7 +64,7 @@ const createAnimationInstance = () => {
 
   p5Instance = new p5(p5sketch, p5div)
 
-  setTimeout(createAnimationInstance, 3000)
+  setInterval(updateParams, 3000)
 }
 createAnimationInstance()
 disableAllUserEvents()
