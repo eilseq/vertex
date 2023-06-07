@@ -24,7 +24,7 @@ body {
   overflow: hidden;
 }
 
-#p5div {
+#vertexdiv {
   mix-blend-mode: multiply;
   position: absolute;
   width: 100vmin;

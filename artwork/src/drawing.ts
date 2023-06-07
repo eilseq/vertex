@@ -1,14 +1,11 @@
-import { params } from './params.js'
+const createFastDrawingRoutine = (params) => (p5, size: number) => {
+  const { gen } = params
 
-const { gen, audio } = params
-const { rate } = audio
+  let t1: number = 0
+  let t2: number = 0
+  let t3: number = 0
+  let t4: number = 0
 
-let t1: number = 0
-let t2: number = 0
-let t3: number = 0
-let t4: number = 0
-
-const generatorFast = (p5, size: number) => {
   return () => {
     p5.clear()
     p5.translate(size / 2, size / 2)
@@ -32,8 +29,15 @@ const generatorFast = (p5, size: number) => {
   }
 }
 
-const generatorSlow = (p5, size: number) => {
-  let dRate = rate / 10
+const createSlowDrawingRoutine = (params) => (p5, size: number) => {
+  const { gen, audio } = params
+  const { rate } = audio
+  const dRate = rate / 10
+
+  let t1: number = 0
+  let t2: number = 0
+  let t3: number = 0
+  let t4: number = 0
 
   return () => {
     p5.clear()
@@ -58,4 +62,7 @@ const generatorSlow = (p5, size: number) => {
   }
 }
 
-export const generator = rate > 0.7 ? generatorFast : generatorSlow
+export const createDrawingRoutine = (params) =>
+  params.audio.rate > 0.7
+    ? createFastDrawingRoutine(params)
+    : createSlowDrawingRoutine(params)
