@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Gridular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/Gridular-Regular.woff2') format('woff2'),
+    url('/fonts/Gridular-Regular.woff') format('woff');
+}
+
+html {
+  font-family: 'Gridular', monospace;
+}
