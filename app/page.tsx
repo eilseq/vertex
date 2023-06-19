@@ -26,9 +26,9 @@ export default function Page() {
   }, []);
 
   return (
-    <>
+    <div className="fixed top-1/2 flex w-screen -translate-y-1/2 transform items-center justify-center">
       <div
-        className="space-y-4 text-white mix-blend-difference"
+        className="text-white mix-blend-difference"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
@@ -41,7 +41,7 @@ export default function Page() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
