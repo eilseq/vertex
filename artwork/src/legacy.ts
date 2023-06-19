@@ -1,7 +1,7 @@
 export const legacyRandomGenerator = (hash: string) => {
   let alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
-  let b58dec = (str) =>
-    [...str].reduce(
+  let b58dec = (str: string) =>
+    Array.from(str).reduce(
       (p, c) => (p * alphabet.length + alphabet.indexOf(c)) | 0,
       0
     )

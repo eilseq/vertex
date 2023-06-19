@@ -1,6 +1,6 @@
 import { Player, start } from 'tone'
 
-const vhs = document.querySelector('#vhsNoise') as HTMLVideoElements
+const vhs = document.querySelector('#vhsNoise') as HTMLVideoElement
 const audio = new Player().toDestination()
 
 audio.autostart = true

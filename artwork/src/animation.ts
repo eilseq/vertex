@@ -1,14 +1,21 @@
+import type p5 from 'p5'
+
 import { setDitherColor } from './dither'
+import { DrawingParams } from './drawing'
 import { getSize, hslToRgb } from './helpers'
 
-export const createAnimationSketch = (div, params, graphicGenerator) => {
+export const createAnimationSketch = (
+  div: HTMLDivElement,
+  params: DrawingParams,
+  graphicGenerator: (p5: p5, size: number) => () => void
+) => {
   const { hue, luma } = params.color
   const color = hslToRgb([hue, 1, luma])
 
   document.body.style.background = `rgb(${color[0]}, ${color[1]}, ${color[2]})`
   setDitherColor(color)
 
-  return (p5) => {
+  return (p5: p5) => {
     p5.setup = () => {
       const { wrnd, hrnd, p5divrotate, strokeweight } = params.setup
 

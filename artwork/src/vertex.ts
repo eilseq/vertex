@@ -2,7 +2,7 @@ import p5 from 'p5'
 import seedrandom from 'seedrandom'
 
 import { legacyRandomGenerator } from './legacy'
-import { createDrawingRoutine } from './drawing'
+import { createDrawingRoutine, DrawingParams } from './drawing'
 import { createAnimationSketch } from './animation'
 import { loadMedia } from './media'
 
@@ -10,21 +10,17 @@ export class Vertex {
   static NUM_AUDIO_FILES = 10
   static singleton: Vertex | undefined
 
+  private params = {} as DrawingParams
+
   private seed: string | undefined
-  private params = {
-    audio: {} as { audioFile?: string; rate?: number },
-    gen: {} as Record<string, number>,
-    color: {} as Record<string, number>,
-    setup: {} as Record<string, number>
-  }
   private random = (min: number, max: number) =>
     Math.random() * (max - min) + min
 
   private vertexInstance: p5
-  private vertexDiv: HTMLElement
+  private vertexDiv: HTMLDivElement
   private vertexSketch: (p5: p5, size: number) => void
 
-  static createOrUpdateSingleInstance(seed?: string): Vertex {
+  static createOrUpdateSingleInstance(seed?: string): void {
     if (!Vertex.singleton) {
       Vertex.singleton = new Vertex(seed)
     } else if (seed && seed !== Vertex.singleton.seed) {
@@ -51,7 +47,7 @@ export class Vertex {
   }
 
   private constructor(seed?: string) {
-    this.vertexDiv = document.querySelector('#vertexdiv') as HTMLElement
+    this.vertexDiv = document.querySelector('#vertexdiv') as HTMLDivElement
 
     if (seed) {
       this.seed = seed
@@ -109,8 +105,7 @@ export class Vertex {
   }
 
   private evaluateRandomFunctioUsingSeed(seed: string): void {
-    const [firts, second] = seed
-    if (firts === 'o' && second === 'o') {
+    if (seed[0] === 'o' && seed[1] === 'o') {
       // Legacy mode to mantain consistency with first collection
       // fallback on legacy generator for token seeds
       this.random = (min: number, max: number) =>
