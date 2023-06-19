@@ -3,9 +3,9 @@
 import React from 'react';
 
 import { TokenMetadata } from '#/lib/colleciton';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { useSelectedLayoutSegments } from 'next/navigation';
 
-const DEFAULT_HASH = 'ooDefault';
+import { DEFAULT_SEED_LEGACY } from '#/lib/constants';
 
 export default function TokenInfo({
   collection,
@@ -14,9 +14,10 @@ export default function TokenInfo({
   collection: TokenMetadata[];
   className?: string;
 }) {
-  const segment = useSelectedLayoutSegment();
+  const segments = useSelectedLayoutSegments();
+  const id = segments[1] || DEFAULT_SEED_LEGACY;
   const token = collection.find(
-    (token: TokenMetadata) => token.iterationHash === segment,
+    (token: TokenMetadata) => token.iterationHash === id,
   );
 
   return (

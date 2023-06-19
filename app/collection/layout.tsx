@@ -15,14 +15,11 @@ export default async function Layout({
   const collection = await getGenerationsFromTokenId(TOKEN_ID);
   return (
     <>
-      <nav className="my-6=8 fixed left-0 right-0 top-8 flex w-screen items-center justify-center mix-blend-difference">
+      <nav className="fixed left-0 right-0 top-8 my-6 flex w-screen items-center justify-center mix-blend-difference">
         <Selection collection={collection} />
       </nav>
       {children}
-      <TokenInfo
-        collection={collection}
-        className="hover:animate-pulseSlow ml-[-1%] mt-[148%] w-[364px] font-thin text-purple-600 mix-blend-difference delay-300"
-      />
+
       <footer className="fixed bottom-0 left-0 mx-10 my-6 w-11/12 text-purple-400 mix-blend-difference">
         <div className="flex items-center justify-between">
           <div className="animate-pulseSlow flex w-fit flex-col text-xs font-semibold">
@@ -39,6 +36,12 @@ export default async function Layout({
                 EILSEQ
               </a>
             </p>
+          </div>
+          <div className="fixed bottom-20 flex w-[95%] justify-center">
+            <TokenInfo
+              collection={collection}
+              className="hover:animate-pulseSlow  w-[364px] font-thin text-purple-600 mix-blend-difference delay-300"
+            />
           </div>
           <ArrowButton direction="right" className="hover:animate-pulseFast" />
         </div>
