@@ -43,7 +43,7 @@ export default async function Layout({
               className="hover:animate-pulseSlow  w-[364px] font-thin text-purple-600 mix-blend-difference delay-300"
             />
           </div>
-          <ArrowButton direction="right" className="hover:animate-pulseFast" />
+          <ArrowButton className="hover:animate-pulseFast" />
         </div>
       </footer>
     </>
