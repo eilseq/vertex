@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --outDir ../public/v0 --emptyOutDir",
+    "build": "vite build --outDir ../public/v1 --emptyOutDir",
     "preview": "vite preview"
   },
   "devDependencies": {

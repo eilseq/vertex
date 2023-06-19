@@ -18,7 +18,7 @@ export default function Page() {
   const letTitleBlurOut = () => {
     setLeaving(true);
     setReady(false);
-    router.push('/collection');
+    router.push('/collection/legacy');
   };
 
   useEffect(() => {

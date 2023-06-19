@@ -37,4 +37,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 # artwork build
-/public/v0
+/public/v1

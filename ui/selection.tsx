@@ -7,21 +7,18 @@ import { useSelectedLayoutSegment } from 'next/navigation';
 
 import { Dropdown, useTheme } from '@nextui-org/react';
 import { Key, useEffect, useMemo, useState } from 'react';
+import { DEFAULT_SEED_LEGACY } from '#/lib/constants';
 
-const DEFAULT_SEED = 'ooCvei2JsMHA9NWpTcoXcSewHYpVSUogZcZyVGPo8xngFgcsG2x';
+export default LegacyTokenSelection;
 
-export default function Selection({
-  collection,
-}: {
-  collection: TokenMetadata[];
-}) {
+function LegacyTokenSelection({ collection }: { collection: TokenMetadata[] }) {
   const route = useRouter();
   const segment = useSelectedLayoutSegment();
 
   const { theme } = useTheme();
 
   const [selected, setSelected] = useState<Iterable<Key>>(
-    new Set<Key>([DEFAULT_SEED]),
+    new Set<Key>([DEFAULT_SEED_LEGACY]),
   );
 
   const selectedValue = useMemo(
@@ -30,8 +27,8 @@ export default function Selection({
   );
 
   useEffect(() => {
-    if (selectedValue === DEFAULT_SEED) return;
-    route.push(`/collection/${selectedValue}`);
+    if (selectedValue === DEFAULT_SEED_LEGACY) return;
+    route.push(`/collection/legacy/${selectedValue}`);
   }, [route, selectedValue]);
 
   return (
@@ -54,7 +51,7 @@ export default function Selection({
           e?.preventDefault();
         }}
       >
-        {segment || DEFAULT_SEED}
+        {selected || DEFAULT_SEED_LEGACY}
       </Dropdown.Button>
       <Dropdown.Menu
         aria-label="collection tokens"
