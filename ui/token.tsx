@@ -6,7 +6,7 @@ const Token = () => {
   return (
     <iframe
       id="vertex-iframe"
-      className="h-screen w-screen"
+      className="min-w-xl h-screen w-screen"
       src="/v0/index.html"
     />
   );
